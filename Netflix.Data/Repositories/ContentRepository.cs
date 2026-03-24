@@ -21,6 +21,20 @@ public class ContentRepository(NetflixDbContext context) : IContentRepository
             .ToListAsync();
     }
 
+    public async Task<List<Movie>> GetAllMoviesAsync()
+    {
+        return await context.Movies
+            .Include(c => c.Genre)
+            .ToListAsync();
+    }
+
+    public async Task<List<Series>> GetAllSeriesAsync()
+    {
+        return await context.Series
+            .Include(c => c.Genre)
+            .ToListAsync();
+    }
+
     public async Task AddAsync(Content content)
     {
         await context.Contents.AddAsync(content);
@@ -29,6 +43,19 @@ public class ContentRepository(NetflixDbContext context) : IContentRepository
     public async Task AddRangeAsync(IEnumerable<Content> contents)
     {
         await context.Contents.AddRangeAsync(contents);
+    }
+
+    public Task UpdateAsync(Content content)
+    {
+        context.Contents.Update(content);
+        return Task.CompletedTask;
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        var content = await context.Contents.FindAsync(id);
+        if (content != null)
+            context.Contents.Remove(content);
     }
 
     public async Task SaveChangesAsync()

@@ -11,7 +11,7 @@ namespace Netflix;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -68,6 +68,12 @@ public class Program
         });
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<NetflixDbContext>();
+            await DbSeeder.SeedAsync(context);
+        }
 
         if (app.Environment.IsDevelopment())
         {

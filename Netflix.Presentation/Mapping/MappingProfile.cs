@@ -42,5 +42,14 @@ public class MappingProfile : Profile
         
         CreateMap<MyListItem, MyListItemDto>()
             .ForMember(dest => dest.ContentTitle, opt => opt.MapFrom(src => src.Content != null ? src.Content.Title : $"Content ID {src.ContentId}"));
+
+        CreateMap<CreateMovieDto, Movie>();
+        CreateMap<UpdateMovieDto, Movie>();
+
+        CreateMap<CreateSeriesDto, Series>();
+        CreateMap<UpdateSeriesDto, Series>();
+
+        CreateMap<CreateGenreDto, Genre>();
+        CreateMap<UpdateGenreDto, Genre>();
     }
 }
