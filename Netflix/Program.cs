@@ -5,6 +5,7 @@ using Netflix.DataAccess.CsvReading;
 using Netflix.DataAccess.Data;
 using Netflix.DataAccess.Interfaces;
 using Netflix.DataAccess.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace Netflix;
 
@@ -39,7 +40,32 @@ public class Program
         });
 
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+            {
+                Description = "Hardcoded API Key authorization. Please enter key **secret123**",
+                Type = SecuritySchemeType.ApiKey,
+                Name = "X-Api-Key",
+                In = ParameterLocation.Header
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "ApiKey"
+                        },
+                        In = ParameterLocation.Header
+                    },
+                    new List<string>()
+                }
+            });
+        });
 
         var app = builder.Build();
 
