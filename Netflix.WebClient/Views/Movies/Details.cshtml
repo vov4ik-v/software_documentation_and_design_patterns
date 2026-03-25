@@ -1,0 +1,63 @@
+@model Netflix.WebClient.Models.DTO.ContentDetailDto
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="detail-wrap">
+    <div class="detail-hero">
+        <div class="detail-header">
+            <h1 class="detail-title">@Model.Title</h1>
+            <div class="actions">
+                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.Id">✏️ Редагувати</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">🗑️ Видалити</a>
+            </div>
+        </div>
+
+        <div class="detail-tags">
+            <span class="tag tag-red">🎬 Фільм</span>
+            <span class="tag">@Model.AgeRating</span>
+            <span class="tag">@(string.IsNullOrEmpty(Model.GenreName) ? "—" : Model.GenreName)</span>
+            <span class="tag">@Model.Language</span>
+            <span class="tag">@Model.Country</span>
+        </div>
+
+        <p class="detail-desc">@Model.Description</p>
+
+        <div class="detail-meta-grid" style="margin-top:24px">
+            <div class="meta-item">
+                <label>Рік виходу</label>
+                <p>@Model.ReleaseYear</p>
+            </div>
+            <div class="meta-item">
+                <label>Тривалість</label>
+                <p>@(Model.DurationMin?.ToString() ?? "—") хв</p>
+            </div>
+            <div class="meta-item">
+                <label>Відгуків</label>
+                <p>@Model.Reviews.Count</p>
+            </div>
+            <div class="meta-item">
+                <label>Оцінок</label>
+                <p>@Model.Ratings.Count</p>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Reviews.Count > 0)
+    {
+        <div class="reviews-section">
+            <h3>💬 Відгуки</h3>
+            @foreach (var r in Model.Reviews)
+            {
+                <div class="review-item">
+                    <div class="review-author">Користувач #@r.UserId</div>
+                    <div class="review-text">@r.Comment</div>
+                </div>
+            }
+        </div>
+    }
+
+    <div style="margin-top:24px">
+        <a asp-action="Index" class="btn btn-secondary">← До списку</a>
+    </div>
+</div>

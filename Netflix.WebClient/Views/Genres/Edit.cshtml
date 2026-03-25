@@ -1,0 +1,25 @@
+@model Netflix.WebClient.Models.DTO.UpdateGenreDto
+@{
+    ViewData["Title"] = "Редагувати жанр";
+}
+
+<div class="detail-wrap">
+    <h2>✏️ Редагувати жанр</h2>
+    <div class="form-container" style="margin: 20px 0;">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name">Назва жанру</label>
+                <input asp-for="Name" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+            <a asp-action="Index" class="btn btn-secondary" style="margin-left:10px;">Скасувати</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

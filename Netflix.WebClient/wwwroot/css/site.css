@@ -1,0 +1,325 @@
+:root {
+    --bg-dark: #141414;
+    --text-light: #e5e5e5;
+    --netflix-red: #e50914;
+    --card-bg: #1f1f1f;
+    --hover-bg: #2f2f2f;
+    --border-color: #333;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+header {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    padding: 20px 4%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    color: var(--netflix-red);
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+main {
+    padding: 20px 4%;
+    min-height: 80vh;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+}
+
+/* Base button */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--netflix-red);
+    color: #fff;
+}
+.btn-primary:hover {
+    background-color: #f40612;
+}
+
+.btn-secondary {
+    background-color: rgba(109, 109, 110, 0.7);
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: rgba(109, 109, 110, 0.4);
+}
+
+.btn-danger {
+    background-color: transparent;
+    border: 1px solid var(--netflix-red);
+    color: var(--netflix-red);
+}
+.btn-danger:hover {
+    background-color: rgba(229, 9, 20, 0.1);
+}
+
+/* Grid Layout */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Card Style */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.card-img-placeholder {
+    height: 300px;
+    background: linear-gradient(45deg, #111, #333);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #a3a3a3;
+    margin-bottom: 10px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+.card-actions .btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+    flex: 1;
+    text-align: center;
+}
+
+/* Form Styles */
+.form-container {
+    max-width: 600px;
+    background-color: rgba(0,0,0,0.7);
+    padding: 40px;
+    border-radius: 8px;
+    margin: 40px auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #8c8c8c;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    outline: none;
+    background-color: #444;
+}
+
+.text-danger {
+    color: var(--netflix-red);
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Detail View Layout */
+.detail-wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.detail-hero {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.detail-title {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+    color: #fff;
+}
+
+.detail-tags {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: #333;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+.tag-red {
+    background-color: var(--netflix-red);
+}
+
+.detail-desc {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: 20px;
+    color: #ccc;
+}
+
+.detail-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.meta-item label {
+    display: block;
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+.meta-item p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Reviews */
+.reviews-section {
+    margin-top: 40px;
+}
+
+.review-item {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 8px;
+}
+.review-text {
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Confirmation Page */
+.confirm-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+.confirm-card {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+}
+.confirm-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+.confirm-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}

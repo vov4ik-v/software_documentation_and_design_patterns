@@ -1,0 +1,19 @@
+@model Netflix.WebClient.Models.DTO.GenreDto
+@{
+    ViewData["Title"] = "Видалити жанр";
+}
+
+<div class="confirm-wrap">
+    <div class="confirm-card">
+        <div class="confirm-icon">🗑️</div>
+        <h2>Видалити жанр?</h2>
+        <p>Ви впевнені, що хочете видалити жанр <strong>@Model.Name</strong>?</p>
+        
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <div class="confirm-actions">
+                <button type="submit" class="btn btn-danger">Так, видалити</button>
+                <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+            </div>
+        </form>
+    </div>
+</div>

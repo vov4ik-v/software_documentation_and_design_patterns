@@ -1,0 +1,27 @@
+@model IEnumerable<Netflix.WebClient.Models.DTO.GenreDto>
+@{
+    ViewData["Title"] = "Жанри";
+}
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>🎭 Каталог Жанрів</h2>
+    <a class="btn btn-primary" asp-action="Create">+ Додати жанр</a>
+</div>
+
+<div class="content-grid">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="cursor: default;">
+            <div class="card-img-placeholder" style="height: 120px;">
+                @item.Name
+            </div>
+            <div class="card-body">
+                <h3 class="card-title text-center">@item.Name</h3>
+                <div class="card-actions" style="margin-top: 10px;">
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">✏️</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">🗑️</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
