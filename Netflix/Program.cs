@@ -5,13 +5,16 @@ using Netflix.DataAccess.CsvReading;
 using Netflix.DataAccess.Data;
 using Netflix.DataAccess.Interfaces;
 using Netflix.DataAccess.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace Netflix;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +37,21 @@ public class Program
         builder.Services.AddControllers()
             .AddApplicationPart(typeof(Netflix.Presentation.Controllers.CatalogController).Assembly);
 
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+                };
+            });
+
         builder.Services.AddAutoMapper(cfg => 
         {
             cfg.AddProfile<Netflix.Presentation.Mapping.MappingProfile>();
@@ -42,12 +60,13 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(c =>
         {
-            c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                Description = "Hardcoded API Key authorization. Please enter key **secret123**",
+                Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token. Example: 'Bearer 12345abcdef'",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
                 Type = SecuritySchemeType.ApiKey,
-                Name = "X-Api-Key",
-                In = ParameterLocation.Header
+                Scheme = "Bearer"
             });
 
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -58,16 +77,21 @@ public class Program
                         Reference = new OpenApiReference
                         {
                             Type = ReferenceType.SecurityScheme,
-                            Id = "ApiKey"
-                        },
-                        In = ParameterLocation.Header
+                            Id = "Bearer"
+                        }
                     },
-                    new List<string>()
+                    Array.Empty<string>()
                 }
             });
         });
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<NetflixDbContext>();
+            await DbSeeder.SeedAsync(context);
+        }
 
         if (app.Environment.IsDevelopment())
         {
@@ -76,6 +100,7 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
 

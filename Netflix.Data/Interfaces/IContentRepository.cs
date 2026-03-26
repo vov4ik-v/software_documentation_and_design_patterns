@@ -6,7 +6,11 @@ public interface IContentRepository
 {
     Task<Content?> GetByIdAsync(int id);
     Task<List<Content>> GetAllAsync();
+    Task<List<Movie>> GetAllMoviesAsync();
+    Task<List<Series>> GetAllSeriesAsync();
     Task AddAsync(Content content);
     Task AddRangeAsync(IEnumerable<Content> contents);
+    Task UpdateAsync(Content content);
+    Task DeleteAsync(int id);
     Task SaveChangesAsync();
 }

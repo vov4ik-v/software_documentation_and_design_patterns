@@ -12,7 +12,6 @@ namespace Netflix.Presentation.Controllers;
 public class DataImportController(IDataImportService dataImportService) : ControllerBase
 {
     [HttpPost]
-    [ApiKey]
     public async Task<ActionResult<ImportResultDto>> Import(IFormFile file)
     {
         if (file == null || file.Length == 0)

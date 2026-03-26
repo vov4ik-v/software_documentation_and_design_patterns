@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Netflix</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="brand" asp-area="" asp-controller="Home" asp-action="Index">NETFLIX</a>
+        <nav>
+            <a asp-controller="Home" asp-action="Index">Головна</a>
+            <a asp-controller="Movies" asp-action="Index">Фільми</a>
+            <a asp-controller="Series" asp-action="Index">Серіали</a>
+            <a asp-controller="Genres" asp-action="Index">Жанри</a>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

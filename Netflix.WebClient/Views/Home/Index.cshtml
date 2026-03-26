@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Домашня сторінка";
+}
+
+<div class="text-center" style="margin-top: 50px;">
+    <h1 class="display-4 text-danger font-weight-bold">NETFLIX ADMIN</h1>
+    <p class="lead" style="color: #ccc;">Керування контентом через REST API.</p>
+    
+    <div class="content-grid" style="justify-content: center; margin-top: 40px;">
+        <a asp-controller="Movies" asp-action="Index" class="card" style="text-align: center; text-decoration: none;">
+            <div class="card-img-placeholder" style="height: 150px;">🎬</div>
+            <div class="card-body">
+                <h3 class="card-title">Фільми</h3>
+            </div>
+        </a>
+        <a asp-controller="Series" asp-action="Index" class="card" style="text-align: center; text-decoration: none;">
+            <div class="card-img-placeholder" style="height: 150px;">📺</div>
+            <div class="card-body">
+                <h3 class="card-title">Серіали</h3>
+            </div>
+        </a>
+        <a asp-controller="Genres" asp-action="Index" class="card" style="text-align: center; text-decoration: none;">
+            <div class="card-img-placeholder" style="height: 150px;">🎭</div>
+            <div class="card-body">
+                <h3 class="card-title">Жанри</h3>
+            </div>
+        </a>
+    </div>
+</div>

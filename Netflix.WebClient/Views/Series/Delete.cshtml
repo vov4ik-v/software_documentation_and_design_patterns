@@ -1,0 +1,20 @@
+@model Netflix.WebClient.Models.DTO.ContentDetailDto
+@{
+    ViewData["Title"] = "Видалити серіал";
+}
+
+<div class="confirm-wrap">
+    <div class="confirm-card">
+        <div class="confirm-icon">🗑️</div>
+        <h2>Видалити серіал?</h2>
+        <p>Ви впевнені, що хочете видалити серіал <strong>@Model.Title</strong>?</p>
+        <p class="text-danger" style="font-size: 0.9em; margin-bottom: 20px;">Цю дію неможливо скасувати.</p>
+
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <div class="confirm-actions">
+                <button type="submit" class="btn btn-danger">Так, видалити</button>
+                <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+            </div>
+        </form>
+    </div>
+</div>
