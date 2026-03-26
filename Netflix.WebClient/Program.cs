@@ -9,6 +9,9 @@ builder.Services.AddHttpClient<INetflixApiClient, NetflixApiClient>(client =>
 {
     var baseUrl = builder.Configuration.GetValue<string>("ApiSettings:BaseUrl");
     client.BaseAddress = new Uri(baseUrl ?? "https://localhost:7019");
+}).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+{
+    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 });
 
 var app = builder.Build();

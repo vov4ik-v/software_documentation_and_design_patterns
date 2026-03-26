@@ -8,6 +8,18 @@ public static class DbSeeder
 {
     public static async Task SeedAsync(NetflixDbContext context)
     {
+        if (!await context.Users.AnyAsync(u => u.Email == "admin@example.com"))
+        {
+            var adminUser = new User
+            {
+                Name = "admin",
+                Email = "admin@example.com",
+                Password = "password"
+            };
+            await context.Users.AddAsync(adminUser);
+            await context.SaveChangesAsync();
+        }
+
         if (await context.Genres.AnyAsync())
             return;
 

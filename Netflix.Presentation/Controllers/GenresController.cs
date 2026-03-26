@@ -4,8 +4,11 @@ using Netflix.BusinessLogic.Interfaces;
 using Netflix.Domain.Entities;
 using Netflix.Presentation.DTO;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace Netflix.Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class GenresController(ICatalogService catalogService, IMapper mapper) : ControllerBase
