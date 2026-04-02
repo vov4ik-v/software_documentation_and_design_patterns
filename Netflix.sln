@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netflix.CsvGenerator", "Net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netflix.WebClient", "Netflix.WebClient\Netflix.WebClient.csproj", "{3B072D61-A043-4C4E-AA94-8092C760F4BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netflix.StrategyLab", "Netflix.StrategyLab\Netflix.StrategyLab.csproj", "{5510EA25-DE59-4D80-90FE-244D8215F015}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,5 +51,9 @@ Global
 		{3B072D61-A043-4C4E-AA94-8092C760F4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B072D61-A043-4C4E-AA94-8092C760F4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B072D61-A043-4C4E-AA94-8092C760F4BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5510EA25-DE59-4D80-90FE-244D8215F015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5510EA25-DE59-4D80-90FE-244D8215F015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5510EA25-DE59-4D80-90FE-244D8215F015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5510EA25-DE59-4D80-90FE-244D8215F015}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
