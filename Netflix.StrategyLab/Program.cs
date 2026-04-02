@@ -9,19 +9,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("=== Netflix.StrategyLab (Lab 4) Started ===");
+        var (strategyName, saved) = ConfigManager.RunSetup();
 
+        var projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         var configuration = new ConfigurationBuilder()
-            .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .SetBasePath(projectRoot)
+            .AddJsonFile("appsettings.json", optional: false)
             .Build();
 
-        string datasetPath = configuration["DatasetPath"] ?? "Data/dataset.csv";
+        string datasetPath = configuration["DatasetPath"] ?? "Data/dataset.xlsx";
 
         IOutputStrategy strategy;
         try
         {
-            strategy = OutputStrategyFactory.CreateStrategy(configuration);
+            strategy = OutputStrategyFactory.CreateStrategy(strategyName, configuration);
         }
         catch (Exception ex)
         {

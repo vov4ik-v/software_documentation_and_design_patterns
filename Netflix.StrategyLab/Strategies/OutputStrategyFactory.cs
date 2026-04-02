@@ -5,10 +5,8 @@ namespace Netflix.StrategyLab.Strategies;
 
 public static class OutputStrategyFactory
 {
-    public static IOutputStrategy CreateStrategy(IConfiguration configuration)
+    public static IOutputStrategy CreateStrategy(string strategyName, IConfiguration configuration)
     {
-        var strategyName = configuration["OutputStrategy"] ?? "Console";
-
         return strategyName.ToLowerInvariant() switch
         {
             "console" => new ConsoleOutputStrategy(),
