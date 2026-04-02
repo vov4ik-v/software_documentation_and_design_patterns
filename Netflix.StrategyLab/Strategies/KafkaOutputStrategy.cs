@@ -5,16 +5,10 @@ using Confluent.Kafka;
 
 namespace Netflix.StrategyLab.Strategies;
 
-public class KafkaOutputStrategy : IOutputStrategy
+public class KafkaOutputStrategy(IConfiguration configuration) : IOutputStrategy
 {
-    private readonly string _bootstrapServers;
-    private readonly string _topic;
-
-    public KafkaOutputStrategy(IConfiguration configuration)
-    {
-        _bootstrapServers = configuration["Kafka:BootstrapServers"] ?? "localhost:9092";
-        _topic = configuration["Kafka:Topic"] ?? "netflix-data";
-    }
+    private readonly string _bootstrapServers = configuration["Kafka:BootstrapServers"] ?? "localhost:9092";
+    private readonly string _topic = configuration["Kafka:Topic"] ?? "netflix-data";
 
     public void WriteData(IEnumerable<string> data)
     {

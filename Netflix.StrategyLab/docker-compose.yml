@@ -18,8 +18,29 @@ services:
       - KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0
       - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
 
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: netflix-kafka-ui
+    ports:
+      - '8080:8080'
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+    depends_on:
+      - kafka
+
   redis:
     image: redis:alpine
     container_name: netflix-redis
     ports:
       - '6379:6379'
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: netflix-redis-ui
+    ports:
+      - '8081:8081'
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    depends_on:
+      - redis

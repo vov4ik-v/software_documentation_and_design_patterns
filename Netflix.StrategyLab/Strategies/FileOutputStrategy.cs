@@ -2,14 +2,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Netflix.StrategyLab.Strategies;
 
-public class FileOutputStrategy : IOutputStrategy
+public class FileOutputStrategy(IConfiguration configuration) : IOutputStrategy
 {
-    private readonly string _filePath;
-
-    public FileOutputStrategy(IConfiguration configuration)
-    {
-        _filePath = configuration["OutputPath"] ?? "Data/output.txt";
-    }
+    private readonly string _filePath = configuration["OutputPath"] ?? "Data/output.txt";
 
     public void WriteData(IEnumerable<string> data)
     {

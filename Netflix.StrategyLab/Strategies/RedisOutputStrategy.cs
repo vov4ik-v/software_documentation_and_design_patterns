@@ -5,16 +5,10 @@ using StackExchange.Redis;
 
 namespace Netflix.StrategyLab.Strategies;
 
-public class RedisOutputStrategy : IOutputStrategy
+public class RedisOutputStrategy(IConfiguration configuration) : IOutputStrategy
 {
-    private readonly string _connectionString;
-    private readonly string _listKey;
-
-    public RedisOutputStrategy(IConfiguration configuration)
-    {
-        _connectionString = configuration["Redis:ConnectionString"] ?? "localhost:6379";
-        _listKey = configuration["Redis:ListKey"] ?? "netflix-data-list";
-    }
+    private readonly string _connectionString = configuration["Redis:ConnectionString"] ?? "localhost:6379";
+    private readonly string _listKey = configuration["Redis:ListKey"] ?? "netflix-data-list";
 
     public void WriteData(IEnumerable<string> data)
     {
