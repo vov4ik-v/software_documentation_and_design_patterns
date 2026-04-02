@@ -13,7 +13,7 @@ class Program
 
         var configuration = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .Build();
 
         string datasetPath = configuration["DatasetPath"] ?? "Data/dataset.csv";
@@ -35,7 +35,7 @@ class Program
         IEnumerable<string> rows;
         try
         {
-            rows = reader.ReadDataset(datasetPath);
+            rows = reader.ReadDataset(datasetPath).ToList();
             Console.WriteLine($"Successfully read {rows.Count()} lines from the dataset.");
         }
         catch (Exception ex)

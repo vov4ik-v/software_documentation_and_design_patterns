@@ -16,16 +16,18 @@ public class RedisOutputStrategy(IConfiguration configuration) : IOutputStrategy
 
         try
         {
-            var redis = ConnectionMultiplexer.Connect(_connectionString);
-            var db = redis.GetDatabase();
-
-            int count = 0;
-            foreach (var item in data)
+            using (var redis = ConnectionMultiplexer.Connect(_connectionString))
             {
-                db.ListRightPush(_listKey, item);
-                count++;
+                var db = redis.GetDatabase();
+
+                int count = 0;
+                foreach (var item in data)
+                {
+                    db.ListRightPush(_listKey, item);
+                    count++;
+                }
+                Console.WriteLine($"--- Redis Output Strategy Finished ({count} items pushed to Redis list) ---\n");
             }
-            Console.WriteLine($"--- Redis Output Strategy Finished ({count} items pushed to Redis list) ---\n");
         }
         catch (Exception ex)
         {
